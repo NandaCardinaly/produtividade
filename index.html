@@ -1485,6 +1485,7 @@ const POM_WORK=25*60, POM_BREAK=5*60;
 let pomState={
   running:false, phase:'work', // 'work'|'break'|'break_wait'
   remaining:POM_WORK,
+  segmentStart:null, segmentRemaining:POM_WORK,
   sessionDone:0, sessionEst:0,
   cardId:null, cardCol:null, cardTitle:null,
   schedId:null,
@@ -1565,18 +1566,25 @@ function pomToggle(){
   if(!pomState.cardId){toast('Selecione uma tarefa primeiro!');return;}
   pomState.running=!pomState.running;
   if(pomState.running){
-    // start session record if new
+    // Guarda timestamp de referência: quando este segmento começou
+    pomState.segmentStart=Date.now();
+    pomState.segmentRemaining=pomState.remaining;
     if(!pomState.sessionId) pomStartSession();
-    pomTimer=setInterval(pomTick,1000);
+    pomTimer=setInterval(pomTick,250); // checa 4x/s para maior precisão
   } else {
     clearInterval(pomTimer);
+    // Salva quanto tempo sobrou ao pausar
+    const elapsed=Math.floor((Date.now()-pomState.segmentStart)/1000);
+    pomState.remaining=Math.max(0,pomState.segmentRemaining-elapsed);
   }
   pomRenderTimer();
   updateMiniPlayer();
 }
 
 function pomTick(){
-  pomState.remaining--;
+  // Calcula tempo real decorrido desde que o segmento começou
+  const elapsed=Math.floor((Date.now()-pomState.segmentStart)/1000);
+  pomState.remaining=Math.max(0,pomState.segmentRemaining-elapsed);
   pomRenderTimer();
   if(pomState.remaining<=0){
     clearInterval(pomTimer);
@@ -1614,8 +1622,10 @@ function pomStartBreak(){
   if(banner) banner.classList.remove('show');
   pomState.phase='break';
   pomState.remaining=POM_BREAK;
+  pomState.segmentStart=Date.now();
+  pomState.segmentRemaining=POM_BREAK;
   pomState.running=true;
-  pomTimer=setInterval(pomTick,1000);
+  pomTimer=setInterval(pomTick,250);
   pomRenderTimer();
   updateMiniPlayer();
 }
@@ -1680,6 +1690,7 @@ function selectPomTask(cardId,cardCol,cardTitle,est,schedId=null){
   clearInterval(pomTimer);
   pomState={
     running:false,phase:'work',remaining:POM_WORK,
+    segmentStart:null,segmentRemaining:POM_WORK,
     sessionDone:0,sessionEst:est||0,
     cardId,cardCol,cardTitle,schedId,sessionId:null,
     miniCollapsed:pomState.miniCollapsed,
