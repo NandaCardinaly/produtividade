@@ -269,6 +269,87 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:0 24
   .view{padding:14px}
   .week-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ===================== POMODORO ===================== */
+.pom-view{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.pom-main{background:var(--card);border-radius:18px;border:1px solid var(--border);box-shadow:var(--sh);overflow:hidden}
+.pom-hero{padding:36px 32px;display:flex;flex-direction:column;align-items:center;gap:20px;background:linear-gradient(160deg,#1a1714 0%,#2d2420 100%);color:#fff;position:relative}
+.pom-task-name{font-family:'Fraunces',serif;font-size:18px;font-weight:300;opacity:.85;text-align:center;max-width:280px;line-height:1.4}
+.pom-task-name.empty{opacity:.3;font-style:italic}
+.pom-ring-wrap{position:relative;width:200px;height:200px}
+.pom-ring-svg{transform:rotate(-90deg)}
+.pom-ring-bg{fill:none;stroke:rgba(255,255,255,.1);stroke-width:8}
+.pom-ring-fg{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .9s linear}
+.pom-ring-fg.break{stroke:#4a7c59}
+.pom-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.pom-time{font-family:'Fraunces',serif;font-size:48px;font-weight:300;letter-spacing:-2px;line-height:1}
+.pom-phase{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;opacity:.55}
+.pom-controls{display:flex;gap:12px;align-items:center}
+.pom-btn{width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s}
+.pom-btn.primary{background:var(--accent);color:#fff;width:60px;height:60px;font-size:22px}
+.pom-btn.primary:hover{background:#a0622e;transform:scale(1.05)}
+.pom-btn.sec{background:rgba(255,255,255,.1);color:#fff}
+.pom-btn.sec:hover{background:rgba(255,255,255,.2)}
+.pom-counters{display:flex;gap:16px}
+.pom-counter{display:flex;flex-direction:column;align-items:center;gap:3px}
+.pom-counter-num{font-size:22px;font-weight:500}
+.pom-counter-lbl{font-size:10px;opacity:.45;text-transform:uppercase;letter-spacing:.8px}
+.pom-footer{padding:16px 20px;border-top:1px solid var(--border);background:var(--surface)}
+.pom-pom-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pom-dot{width:12px;height:12px;border-radius:50%;background:var(--border);transition:all .3s}
+.pom-dot.done{background:var(--accent)}
+.pom-dot.current{background:var(--accent);box-shadow:0 0 0 3px var(--accent-l)}
+.pom-select-wrap{padding:16px 20px;border-bottom:1px solid var(--border)}
+.pom-select-wrap p{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.pom-task-list{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto}
+.pom-task-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:9px;border:1px solid var(--border);cursor:pointer;transition:all .15s;gap:8px}
+.pom-task-item:hover{border-color:var(--accent);background:var(--accent-l)}
+.pom-task-item.active{border-color:var(--accent);background:var(--accent-l)}
+.pom-task-item-name{font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pom-task-poms{font-size:11px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:4px}
+.pom-break-banner{display:none;padding:12px 20px;background:var(--green-l);border-top:1px solid #b8dfc8;align-items:center;justify-content:space-between;gap:10px}
+.pom-break-banner.show{display:flex}
+.pom-break-banner p{font-size:13px;color:var(--green);font-weight:500}
+
+/* MINI PLAYER */
+.pom-mini{position:fixed;bottom:20px;right:20px;z-index:300;background:var(--text);color:#fff;border-radius:14px;box-shadow:var(--sh-lg);padding:12px 16px;display:none;align-items:center;gap:12px;min-width:220px;cursor:pointer;transition:all .25s}
+.pom-mini.show{display:flex}
+.pom-mini.collapsed{min-width:auto}
+.pom-mini-time{font-family:'Fraunces',serif;font-size:20px;font-weight:300;white-space:nowrap}
+.pom-mini-info{display:flex;flex-direction:column;gap:1px;flex:1;overflow:hidden}
+.pom-mini-task{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.pom-mini-phase{font-size:10px;opacity:.45;text-transform:uppercase;letter-spacing:.8px}
+.pom-mini-btns{display:flex;gap:6px}
+.pom-mini-btn{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:12px;transition:background .15s}
+.pom-mini-btn:hover{background:rgba(255,255,255,.3)}
+.pom-mini-collapse{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:13px;padding:2px 4px}
+.pom-mini-collapse:hover{color:#fff}
+
+/* DASHBOARD */
+.pom-dash{display:flex;flex-direction:column;gap:16px}
+.dash-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:18px 20px;box-shadow:var(--sh)}
+.dash-card h4{font-family:'Fraunces',serif;font-size:15px;font-weight:500;margin-bottom:14px;color:var(--text)}
+.dash-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.dash-stat{background:var(--bg);border-radius:10px;padding:12px 14px;text-align:center}
+.dash-stat-num{font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:var(--accent);line-height:1}
+.dash-stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.dash-task-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.dash-task-row:last-child{border-bottom:none}
+.dash-task-name{font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dash-pom-bar{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.dash-bar-wrap{width:80px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.dash-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+.dash-bar-fill.over{background:var(--green)}
+.dash-nums{font-size:11px;color:var(--muted);white-space:nowrap}
+.dash-day-row{display:flex;align-items:center;gap:8px;padding:6px 0}
+.dash-day-name{font-size:12px;color:var(--muted);width:36px;flex-shrink:0}
+.dash-day-bar-wrap{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.dash-day-bar{height:100%;background:var(--accent);border-radius:4px}
+.dash-day-num{font-size:11px;color:var(--muted);width:24px;text-align:right;flex-shrink:0}
+
+/* card pom badge */
+.card-pom{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:3px;margin-top:3px}
+.card-pom .done-poms{color:var(--accent);font-weight:500}
 </style>
 </head>
 <body>
@@ -283,6 +364,7 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:0 24
     <button class="nav-tab" onclick="switchView('backlog',this)">📦 Backlog</button>
     <button class="nav-tab" onclick="switchView('cal',this)">📅 Calendário</button>
     <button class="nav-tab" onclick="switchView('estudos',this)">📚 Estudos</button>
+    <button class="nav-tab" onclick="switchView('pomodoro',this)">🍅 Pomodoro</button>
   </div>
   <div class="hdr-right">
     <div class="sync-dot" id="sync-dot"></div>
@@ -450,6 +532,15 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:0 24
       <div class="field"><label>Descrição</label><textarea id="ec-desc" rows="3"></textarea></div>
       <div class="field"><label>Prazo</label><input type="date" id="ec-dead"></div>
     </div>
+      <div class="field"><label>Pomodoros estimados</label>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
+          <button onclick="adjEcPom(-1)" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:16px">-</button>
+          <span id="ec-pom-count" style="font-size:16px;font-weight:500;min-width:20px;text-align:center">0</span>
+          <button onclick="adjEcPom(1)" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:16px">+</button>
+          <span style="font-size:12px;color:var(--muted)" id="ec-pom-time">= não estimado</span>
+        </div>
+      </div>
+    </div>
     <div class="modal-foot">
       <button class="btn-g" onclick="closeModal('modal-card')">Cancelar</button>
       <button class="btn" onclick="saveCardEdit()">✓ Salvar</button>
@@ -542,6 +633,77 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:0 24
   </div>
 </div>
 
+
+<!-- POMODORO -->
+<div class="view" id="view-pomodoro">
+  <div class="pom-view">
+    <!-- LEFT: timer + task selector -->
+    <div class="pom-main">
+      <div class="pom-select-wrap">
+        <p>Selecionar tarefa</p>
+        <div class="pom-task-list" id="pom-task-list"></div>
+      </div>
+      <div class="pom-hero">
+        <div class="pom-task-name empty" id="pom-task-name">Nenhuma tarefa selecionada</div>
+        <div class="pom-ring-wrap">
+          <svg class="pom-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+            <circle class="pom-ring-bg" cx="100" cy="100" r="88"/>
+            <circle class="pom-ring-fg" id="pom-ring" cx="100" cy="100" r="88"
+              stroke-dasharray="553" stroke-dashoffset="0"/>
+          </svg>
+          <div class="pom-ring-center">
+            <div class="pom-time" id="pom-display">25:00</div>
+            <div class="pom-phase" id="pom-phase-lbl">FOCO</div>
+          </div>
+        </div>
+        <div class="pom-controls">
+          <button class="pom-btn sec" onclick="pomReset()" title="Reiniciar">↺</button>
+          <button class="pom-btn primary" id="pom-play-btn" onclick="pomToggle()">▶</button>
+          <button class="pom-btn sec" onclick="pomSkip()" title="Pular">⏭</button>
+        </div>
+        <div class="pom-counters">
+          <div class="pom-counter">
+            <div class="pom-counter-num" id="pom-done-count">0</div>
+            <div class="pom-counter-lbl">Concluídos</div>
+          </div>
+          <div class="pom-counter">
+            <div class="pom-counter-num" id="pom-est-count">—</div>
+            <div class="pom-counter-lbl">Estimado</div>
+          </div>
+        </div>
+        <div class="pom-pom-row" id="pom-dots"></div>
+      </div>
+      <div class="pom-break-banner" id="pom-break-banner">
+        <p>☕ Hora da pausa! Descanse 5 minutos.</p>
+        <div style="display:flex;gap:8px">
+          <button class="btn" onclick="pomStartBreak()">Iniciar pausa</button>
+          <button class="btn-g" onclick="pomSkipBreak()">Pular</button>
+        </div>
+      </div>
+      <div class="pom-footer">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Progresso da sessão</div>
+        <div class="pom-pom-row" id="pom-session-dots"></div>
+      </div>
+    </div>
+    <!-- RIGHT: dashboard -->
+    <div class="pom-dash" id="pom-dash"></div>
+  </div>
+</div>
+
+<!-- MINI PLAYER -->
+<div class="pom-mini" id="pom-mini" onclick="goToPomodoroView()">
+  <div class="pom-mini-time" id="pom-mini-time">25:00</div>
+  <div class="pom-mini-info">
+    <div class="pom-mini-task" id="pom-mini-task">—</div>
+    <div class="pom-mini-phase" id="pom-mini-phase">FOCO</div>
+  </div>
+  <div class="pom-mini-btns" onclick="event.stopPropagation()">
+    <button class="pom-mini-btn" id="pom-mini-play" onclick="pomToggle()">▶</button>
+    <button class="pom-mini-btn" onclick="pomSkip()">⏭</button>
+  </div>
+  <button class="pom-mini-collapse" onclick="event.stopPropagation();toggleMiniCollapse()" id="pom-mini-col-btn" title="Minimizar">−</button>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -591,6 +753,7 @@ const getColor=k=>COLORS.find(c=>c.key===k)||COLORS[0];
 // STATE
 // =====================================================
 let rotina=[],subtasks={},backlogs=[],cards={};
+let pomSessions=[];
 let subjects=[],schedule=[];
 let showDone=false;
 let dragId=null,dragFrom=null;
@@ -598,6 +761,7 @@ let pendingDelKey=null;
 let selColor=COLORS[0].key,selEmoji=EMOJIS[0];
 let selColorSubj=COLORS[3].key,selEmojiSubj=EMOJIS[4];
 let reList=[],reDragIdx=null;
+let currentView='rotina';
 let editCardId=null,editCardCol=null;
 let subModalRotinaId=null;
 let schedDay=null,schedWeekStart=null,schedPom=2;
@@ -612,21 +776,22 @@ async function init(){
   calYear=now.getFullYear(); calMonth=now.getMonth();
   document.getElementById('date-txt').textContent=now.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
 
-  const[rotinaD,subD,backD,cardsD,subjD,schedD]=await Promise.all([
+  const[rotinaD,subD,backD,cardsD,subjD,schedD,pomD]=await Promise.all([
     dbGet('rotina','?order=position'),
     dbGet('rotina_subtasks','?order=position'),
     dbGet('backlogs','?order=position'),
     dbGet('cards','?order=position'),
     dbGet('study_subjects','?order=position'),
     dbGet('study_schedule','?order=created_at'),
+    dbGet('pomodoro_sessions','?order=started_at.desc&limit=200'),
   ]);
 
   if(rotinaD) rotina=rotinaD;
-  // group subtasks
   if(subD) subD.forEach(s=>{ if(!subtasks[s.rotina_id]) subtasks[s.rotina_id]=[]; subtasks[s.rotina_id].push(s); });
   if(backD) backlogs=backD;
   if(subjD) subjects=subjD;
   if(schedD) schedule=schedD;
+  if(pomD) pomSessions=pomD;
 
   cards={semana:[],dia:[],done:[]};
   backlogs.forEach(b=>{cards[b.key]=[];});
@@ -1014,16 +1179,24 @@ function makeCardEl(card,col){
   const movDia=col==='semana'?`<button class="cbtn" onclick="moveCard('${card.id}','semana','dia')">→Dia</button>`:'';
   const bakSem=col==='dia'?`<button class="cbtn" onclick="moveCard('${card.id}','dia','semana')">←Sem</button>`:'';
   const delBtn=`<button class="cbtn del" onclick="deleteCard('${card.id}','${col}')">✕</button>`;
-  el.innerHTML=`<div class="card-title">${card.title}</div>${descHtml}${dlHtml}<div class="card-meta"><span class="card-tag" style="background:${s.bg};color:${s.text}">${lb}</span><div class="card-acts">${doneBtn}${editBtn}${movSem}${movDia}${bakSem}${delBtn}</div></div>`;
+  const poms=card.pomodoros||0;
+  const pomSess=pomSessions.filter(s=>s.card_id===card.id);
+  const pomDone=pomSessions.filter(s=>s.card_id===card.id).reduce((a,s)=>a+s.pomodoros_completed,0);
+  const pomBtn=col!=='done'?`<button class="cbtn" onclick="startPomFromCard('${card.id}','${col}')" title="Iniciar Pomodoro">🍅</button>`:'';
+  const pomBadge=(poms>0||pomDone>0)?`<div class="card-pom"><span class="done-poms">${pomDone}🍅</span>${poms>0?` / ${poms} est.`:''}</div>`:'';
+  el.innerHTML=`<div class="card-title">${card.title}</div>${descHtml}${dlHtml}${pomBadge}<div class="card-meta"><span class="card-tag" style="background:${s.bg};color:${s.text}">${lb}</span><div class="card-acts">${doneBtn}${editBtn}${pomBtn}${movSem}${movDia}${bakSem}${delBtn}</div></div>`;
   return el;
 }
 
 function openCardEdit(id,col){
   const card=(cards[col]||[]).find(c=>c.id===id);if(!card)return;
   editCardId=id;editCardCol=col;
+  ecPomVal=card.pomodoros||0;
   document.getElementById('ec-title').value=card.title||'';
   document.getElementById('ec-desc').value=card.description||'';
   document.getElementById('ec-dead').value=card.deadline||'';
+  document.getElementById('ec-pom-count').textContent=ecPomVal;
+  document.getElementById('ec-pom-time').textContent=ecPomVal>0?`= ${ecPomVal*25}min`:'= não estimado';
   openModal('modal-card');
 }
 async function saveCardEdit(){
@@ -1031,9 +1204,10 @@ async function saveCardEdit(){
   const desc=document.getElementById('ec-desc').value.trim();
   const dead=document.getElementById('ec-dead').value||null;
   const col=editCardCol;
-  cards[col]=(cards[col]||[]).map(c=>c.id===editCardId?{...c,title,description:desc,deadline:dead}:c);
+  cards[col]=(cards[col]||[]).map(c=>c.id===editCardId?{...c,title,description:desc,deadline:dead,pomodoros:ecPomVal}:c);
   renderAllViews();closeModal('modal-card');
-  await dbPatch('cards',{title,description:desc,deadline:dead},`?id=eq.${editCardId}`);
+  await dbPatch('cards',{title,description:desc,deadline:dead,pomodoros:ecPomVal},`?id=eq.${editCardId}`);
+  if(pomState.cardId===editCardId){pomState.cardTitle=title;pomState.sessionEst=ecPomVal;renderPomTaskList();}
   toast('Card atualizado!');
 }
 
@@ -1286,9 +1460,13 @@ function switchView(name,btn){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');btn.classList.add('active');
+  currentView=name;
   if(name==='cal')renderCal();
   else if(name==='estudos'){renderSubjects();renderWeek();}
+  else if(name==='pomodoro'){renderPomTaskList();renderPomDash();}
   else renderAllViews();
+  // show/hide mini player
+  updateMiniPlayer();
 }
 function toggleDone(){
   showDone=!showDone;document.getElementById('done-arr').textContent=showDone?'▼':'▶';
@@ -1298,6 +1476,386 @@ function toggleDone(){
 let toastT;
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2400);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.add-form').forEach(f=>f.classList.remove('open'));document.querySelectorAll('.overlay').forEach(m=>m.classList.remove('open'));}});
+
+
+// =====================================================
+// POMODORO ENGINE
+// =====================================================
+const POM_WORK=25*60, POM_BREAK=5*60;
+let pomState={
+  running:false, phase:'work', // 'work'|'break'|'break_wait'
+  remaining:POM_WORK,
+  sessionDone:0, sessionEst:0,
+  cardId:null, cardCol:null, cardTitle:null,
+  schedId:null,
+  sessionId:null,
+  miniCollapsed:false,
+};
+let pomTimer=null;
+let pomAudio=null;
+
+function pomBeep(){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [0,300,600].forEach(delay=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=880;o.type='sine';
+      g.gain.setValueAtTime(0,ctx.currentTime+delay/1000);
+      g.gain.linearRampToValueAtTime(0.3,ctx.currentTime+delay/1000+0.05);
+      g.gain.linearRampToValueAtTime(0,ctx.currentTime+delay/1000+0.4);
+      o.start(ctx.currentTime+delay/1000);
+      o.stop(ctx.currentTime+delay/1000+0.45);
+    });
+  }catch(e){}
+}
+
+function pomFmt(s){const m=Math.floor(s/60),sec=s%60;return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;}
+
+function pomRenderTimer(){
+  const disp=document.getElementById('pom-display');
+  const miniTime=document.getElementById('pom-mini-time');
+  const ring=document.getElementById('pom-ring');
+  const phaseLbl=document.getElementById('pom-phase-lbl');
+  const miniPhase=document.getElementById('pom-mini-phase');
+  const playBtn=document.getElementById('pom-play-btn');
+  const miniPlay=document.getElementById('pom-mini-play');
+  const total=pomState.phase==='work'?POM_WORK:POM_BREAK;
+  const frac=pomState.remaining/total;
+  const circ=553;
+  if(disp) disp.textContent=pomFmt(pomState.remaining);
+  if(miniTime) miniTime.textContent=pomFmt(pomState.remaining);
+  if(ring){
+    ring.style.strokeDashoffset=circ*(1-frac);
+    ring.classList.toggle('break',pomState.phase==='break');
+  }
+  const isWork=pomState.phase==='work';
+  const phaseTxt=isWork?'FOCO':'PAUSA';
+  if(phaseLbl) phaseLbl.textContent=phaseTxt;
+  if(miniPhase) miniPhase.textContent=phaseTxt;
+  const icon=pomState.running?'⏸':'▶';
+  if(playBtn) playBtn.textContent=icon;
+  if(miniPlay) miniPlay.textContent=icon;
+  // dots
+  renderPomDots();
+}
+
+function renderPomDots(){
+  const est=pomState.sessionEst||0;
+  const done=pomState.sessionDone;
+  // footer session dots
+  const sd=document.getElementById('pom-session-dots');
+  if(sd){
+    sd.innerHTML='';
+    const total=Math.max(est,done,4);
+    for(let i=0;i<total;i++){
+      const d=document.createElement('div');
+      d.className='pom-dot'+(i<done?' done':i===done&&pomState.phase==='work'&&pomState.running?' current':'');
+      sd.appendChild(d);
+    }
+  }
+  const dc=document.getElementById('pom-done-count');
+  const ec=document.getElementById('pom-est-count');
+  if(dc) dc.textContent=done;
+  if(ec) ec.textContent=est||'—';
+}
+
+function pomToggle(){
+  if(pomState.phase==='break_wait') return;
+  if(!pomState.cardId){toast('Selecione uma tarefa primeiro!');return;}
+  pomState.running=!pomState.running;
+  if(pomState.running){
+    // start session record if new
+    if(!pomState.sessionId) pomStartSession();
+    pomTimer=setInterval(pomTick,1000);
+  } else {
+    clearInterval(pomTimer);
+  }
+  pomRenderTimer();
+  updateMiniPlayer();
+}
+
+function pomTick(){
+  pomState.remaining--;
+  pomRenderTimer();
+  if(pomState.remaining<=0){
+    clearInterval(pomTimer);
+    pomState.running=false;
+    pomBeep();
+    if(pomState.phase==='work'){
+      pomState.sessionDone++;
+      pomFinishWork();
+    } else {
+      pomFinishBreak();
+    }
+  }
+}
+
+async function pomFinishWork(){
+  // Update session in DB
+  if(pomState.sessionId){
+    await dbPatch('pomodoro_sessions',{pomodoros_completed:pomState.sessionDone,ended_at:new Date().toISOString()},`?id=eq.${pomState.sessionId}`);
+    pomSessions=pomSessions.map(s=>s.id===pomState.sessionId?{...s,pomodoros_completed:pomState.sessionDone,ended_at:new Date().toISOString()}:s);
+  }
+  renderPomDots();
+  renderPomDash();
+  renderAllViews();
+  // Show break banner
+  pomState.phase='break_wait';
+  const banner=document.getElementById('pom-break-banner');
+  if(banner) banner.classList.add('show');
+  pomRenderTimer();
+  updateMiniPlayer();
+  toast(`🍅 Pomodoro ${pomState.sessionDone} concluído!`);
+}
+
+function pomStartBreak(){
+  const banner=document.getElementById('pom-break-banner');
+  if(banner) banner.classList.remove('show');
+  pomState.phase='break';
+  pomState.remaining=POM_BREAK;
+  pomState.running=true;
+  pomTimer=setInterval(pomTick,1000);
+  pomRenderTimer();
+  updateMiniPlayer();
+}
+
+function pomSkipBreak(){
+  const banner=document.getElementById('pom-break-banner');
+  if(banner) banner.classList.remove('show');
+  pomFinishBreak();
+}
+
+function pomFinishBreak(){
+  pomState.phase='work';
+  pomState.remaining=POM_WORK;
+  pomState.running=false;
+  pomRenderTimer();
+  updateMiniPlayer();
+  toast('☕ Pausa concluída! Pronto para o próximo?');
+}
+
+function pomSkip(){
+  clearInterval(pomTimer);
+  if(pomState.phase==='work'){
+    pomState.sessionDone++;
+    pomFinishWork();
+  } else if(pomState.phase==='break'){
+    pomFinishBreak();
+  } else {
+    pomSkipBreak();
+  }
+}
+
+function pomReset(){
+  clearInterval(pomTimer);
+  pomState.running=false;
+  pomState.phase='work';
+  pomState.remaining=POM_WORK;
+  const banner=document.getElementById('pom-break-banner');
+  if(banner) banner.classList.remove('show');
+  pomRenderTimer();
+  updateMiniPlayer();
+}
+
+async function pomStartSession(){
+  const today=new Date().toISOString().split('T')[0];
+  const sess={
+    id:'ps'+Date.now(),
+    card_id:pomState.cardId,
+    card_title:pomState.cardTitle,
+    card_col:pomState.cardCol,
+    study_schedule_id:pomState.schedId||null,
+    pomodoros_estimated:pomState.sessionEst,
+    pomodoros_completed:0,
+    started_at:new Date().toISOString(),
+    date:today,
+  };
+  pomState.sessionId=sess.id;
+  pomSessions.unshift(sess);
+  await dbPost('pomodoro_sessions',sess);
+}
+
+function selectPomTask(cardId,cardCol,cardTitle,est,schedId=null){
+  clearInterval(pomTimer);
+  pomState={
+    running:false,phase:'work',remaining:POM_WORK,
+    sessionDone:0,sessionEst:est||0,
+    cardId,cardCol,cardTitle,schedId,sessionId:null,
+    miniCollapsed:pomState.miniCollapsed,
+  };
+  const banner=document.getElementById('pom-break-banner');
+  if(banner) banner.classList.remove('show');
+  const nameEl=document.getElementById('pom-task-name');
+  if(nameEl){nameEl.textContent=cardTitle;nameEl.classList.remove('empty');}
+  const miniTask=document.getElementById('pom-mini-task');
+  if(miniTask) miniTask.textContent=cardTitle;
+  pomRenderTimer();
+  renderPomTaskList();
+  updateMiniPlayer();
+  toast(`Tarefa "${cardTitle}" selecionada!`);
+}
+
+function startPomFromCard(cardId,col){
+  const card=(cards[col]||[]).find(c=>c.id===cardId);if(!card)return;
+  selectPomTask(cardId,col,card.title,card.pomodoros||0);
+  switchView('pomodoro',document.querySelector('.nav-tab:last-child'));
+}
+
+function renderPomTaskList(){
+  const el=document.getElementById('pom-task-list');if(!el)return;
+  el.innerHTML='';
+  // Cards from dia + semana
+  const taskCards=[...(cards.dia||[]),...(cards.semana||[])].filter(c=>c.col!=='done');
+  // Today's study schedule
+  const ws=getWeekStart(weekOffset);
+  const wsStr=dateToStr(ws);
+  const today=new Date().getDay();
+  const todaySched=schedule.filter(s=>s.day_of_week===today&&s.week_start===wsStr&&!s.done);
+
+  if(!taskCards.length&&!todaySched.length){
+    el.innerHTML='<div class="empty">Sem tarefas em Prioridades do Dia/Semana</div>';return;
+  }
+  taskCards.forEach(card=>{
+    const pDone=pomSessions.filter(s=>s.card_id===card.id).reduce((a,s)=>a+s.pomodoros_completed,0);
+    const est=card.pomodoros||0;
+    const isActive=pomState.cardId===card.id;
+    const row=document.createElement('div');
+    row.className='pom-task-item'+(isActive?' active':'');
+    row.onclick=()=>selectPomTask(card.id,card.col,card.title,est);
+    const colLabel={dia:'Dia',semana:'Semana'}[card.col]||card.col;
+    row.innerHTML=`
+      <span class="pom-task-item-name">${card.title}</span>
+      <span class="pom-task-poms">
+        ${pDone>0?`<span style="color:var(--accent);font-weight:500">${pDone}🍅</span>`:''}
+        ${est>0?`/ ${est} est.`:''}
+        <span style="color:var(--border)">·</span>
+        <span style="color:var(--muted)">${colLabel}</span>
+      </span>`;
+    el.appendChild(row);
+  });
+  if(todaySched.length){
+    const div=document.createElement('div');
+    div.style.cssText='font-size:11px;color:var(--muted);padding:8px 0 4px;text-transform:uppercase;letter-spacing:.5px;border-top:1px solid var(--border);margin-top:6px';
+    div.textContent='Estudos de hoje';
+    el.appendChild(div);
+    todaySched.forEach(s=>{
+      const subj=subjects.find(x=>x.id===s.subject_id);if(!subj)return;
+      const pDone=pomSessions.filter(x=>x.study_schedule_id===s.id).reduce((a,x)=>a+x.pomodoros_completed,0);
+      const row=document.createElement('div');
+      row.className='pom-task-item'+(pomState.schedId===s.id?' active':'');
+      row.onclick=()=>selectPomTask(s.id,'study',`${subj.emoji} ${subj.name}${s.material?' — '+s.material:''}`,s.pomodoros,s.id);
+      row.innerHTML=`
+        <span class="pom-task-item-name">${subj.emoji} ${subj.name}${s.material?` <span style="opacity:.6;font-size:11px">— ${s.material}</span>`:''}</span>
+        <span class="pom-task-poms">${pDone>0?`<span style="color:var(--accent);font-weight:500">${pDone}🍅</span> /`:''} ${s.pomodoros} est.</span>`;
+      el.appendChild(row);
+    });
+  }
+}
+
+// =====================================================
+// MINI PLAYER
+// =====================================================
+function updateMiniPlayer(){
+  const mini=document.getElementById('pom-mini');if(!mini)return;
+  const hasTask=!!pomState.cardId;
+  const notOnPomView=currentView!=='pomodoro';
+  if(hasTask&&notOnPomView){
+    mini.classList.add('show');
+  } else {
+    mini.classList.remove('show');
+  }
+  const c=pomState.miniCollapsed;
+  const info=mini.querySelector('.pom-mini-info');
+  const btns=mini.querySelector('.pom-mini-btns');
+  const colBtn=document.getElementById('pom-mini-col-btn');
+  if(info) info.style.display=c?'none':'flex';
+  if(btns) btns.style.display=c?'none':'flex';
+  if(colBtn) colBtn.textContent=c?'+':'−';
+}
+
+function toggleMiniCollapse(){
+  pomState.miniCollapsed=!pomState.miniCollapsed;
+  updateMiniPlayer();
+}
+
+function goToPomodoroView(){
+  const btn=document.querySelector('.nav-tab:last-child');
+  if(btn) switchView('pomodoro',btn);
+}
+
+// =====================================================
+// POMODORO DASHBOARD
+// =====================================================
+function renderPomDash(){
+  const el=document.getElementById('pom-dash');if(!el)return;
+  const today=new Date().toISOString().split('T')[0];
+  const todaySessions=pomSessions.filter(s=>s.date===today);
+  const totalToday=todaySessions.reduce((a,s)=>a+s.pomodoros_completed,0);
+  const totalMin=totalToday*25;
+  const totalSessions=todaySessions.length;
+
+  // Last 7 days
+  const days=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().split('T')[0];
+    const poms=pomSessions.filter(s=>s.date===ds).reduce((a,s)=>a+s.pomodoros_completed,0);
+    days.push({label:['D','S','T','Q','Q','S','S'][d.getDay()],poms,isToday:i===0});
+  }
+  const maxDay=Math.max(...days.map(d=>d.poms),1);
+
+  // Per task today
+  const taskMap={};
+  todaySessions.forEach(s=>{
+    if(!taskMap[s.card_title]) taskMap[s.card_title]={done:0,est:s.pomodoros_estimated||0,id:s.card_id};
+    taskMap[s.card_title].done+=s.pomodoros_completed;
+    if(s.pomodoros_estimated>taskMap[s.card_title].est) taskMap[s.card_title].est=s.pomodoros_estimated;
+  });
+  const taskRows=Object.entries(taskMap).sort((a,b)=>b[1].done-a[1].done);
+
+  el.innerHTML=`
+    <div class="dash-card">
+      <h4>Hoje</h4>
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="dash-stat-num">${totalToday}</div><div class="dash-stat-lbl">🍅 Pomodoros</div></div>
+        <div class="dash-stat"><div class="dash-stat-num">${totalMin}</div><div class="dash-stat-lbl">min focados</div></div>
+        <div class="dash-stat"><div class="dash-stat-num">${totalSessions}</div><div class="dash-stat-lbl">sessões</div></div>
+      </div>
+    </div>
+    <div class="dash-card">
+      <h4>Últimos 7 dias</h4>
+      ${days.map(d=>`
+        <div class="dash-day-row">
+          <div class="dash-day-name" style="${d.isToday?'font-weight:700;color:var(--accent)':''}">${d.label}</div>
+          <div class="dash-day-bar-wrap"><div class="dash-day-bar" style="width:${d.poms?Math.round(d.poms/maxDay*100):0}%"></div></div>
+          <div class="dash-day-num">${d.poms}</div>
+        </div>`).join('')}
+    </div>
+    ${taskRows.length?`
+    <div class="dash-card">
+      <h4>Por tarefa — hoje</h4>
+      ${taskRows.map(([name,{done,est}])=>`
+        <div class="dash-task-row">
+          <div class="dash-task-name" title="${name}">${name}</div>
+          <div class="dash-pom-bar">
+            <div class="dash-bar-wrap"><div class="dash-bar-fill${done>=(est||done+1)?' over':''}" style="width:${est?Math.min(100,Math.round(done/est*100)):100}%"></div></div>
+            <div class="dash-nums">${done}${est?' / '+est:''} 🍅</div>
+          </div>
+        </div>`).join('')}
+    </div>`:''}
+  `;
+}
+
+// Card edit pom counter
+let ecPomVal=0;
+function adjEcPom(v){
+  ecPomVal=Math.max(0,ecPomVal+v);
+  const el=document.getElementById('ec-pom-count');
+  const tl=document.getElementById('ec-pom-time');
+  if(el) el.textContent=ecPomVal;
+  if(tl) tl.textContent=ecPomVal>0?`= ${ecPomVal*25}min`:'= não estimado';
+}
 
 init();
 </script>
